@@ -74,6 +74,7 @@ void ioChangeProcess(unsigned long nowTime, char state) {
       lastEventTime = nowTime;
       break;
   }
+  return;
 }
 
 void timeBasedProcess(unsigned long nowTime, char state) {
@@ -109,7 +110,7 @@ void timeBasedProcess(unsigned long nowTime, char state) {
       lastEventTime = nowTime;
       break;
   }
-  return processed;
+  return;
 }
 
 void setup()
@@ -124,7 +125,7 @@ void loop()
   
   currentKey = digitalRead(keyPin);
   if (currentKey != lastKey) {
-    ioChangeProcess(nowTime, state);
+    ioChangeProcess(nowTime, currentState);
   } else if (nowTime - lastEventTime >= STATE_SWITCH_THRESHOLD || currentState == STATE_THREE_OFF) {
     timeBasedProcess(nowTime, currentState);
   }
